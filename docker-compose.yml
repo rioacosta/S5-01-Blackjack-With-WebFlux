@@ -1,0 +1,40 @@
+services:
+
+  mongodb:
+    image: mongo:7.0
+    container_name: mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    networks:
+      - blackjack-net
+
+  mysql:
+    image: mysql:8.3
+    environment:
+      MYSQL_DATABASE: blackjack
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "3306:3306"
+    networks:
+      - blackjack-net
+
+
+  blackjack-api:
+    build: .
+    container_name: blackjack-api-RioAcosta
+    depends_on:
+      - mongodb
+      - mysql
+    ports:
+      - "8080:8080"
+    networks:
+      - blackjack-net
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+
+networks:
+  blackjack-net:
+    driver: bridge
