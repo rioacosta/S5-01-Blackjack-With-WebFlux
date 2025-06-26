@@ -5,6 +5,7 @@ import cat.itacademy.S5_01_Blackjack_With_WebFlux.dto.CreatePlayerRequestDTO;
 import cat.itacademy.S5_01_Blackjack_With_WebFlux.model.Player;
 import cat.itacademy.S5_01_Blackjack_With_WebFlux.services.PlayerService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,12 @@ import reactor.core.publisher.Mono;
 public class PlayerController {
 
     private final PlayerService playerService;
+    @Operation(summary = "Lista todos los jugadores", description = "Obtiene todos los jugadores registrados en la base de datos")
+    @ApiResponse(responseCode = "200", description = "OK")
+    @GetMapping
+    public Flux<Player> getAllPlayers() {
+        return playerService.getAllPlayers();
+    }
 
     @PostMapping
     @Operation(summary = "Create player")
