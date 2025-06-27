@@ -20,39 +20,38 @@ import reactor.core.publisher.Mono;
 public class PlayerController {
 
     private final PlayerService playerService;
-    @Operation(summary = "Lista todos los jugadores", description = "Obtiene todos los jugadores registrados en la base de datos")
+
+    @Operation(summary = "List all players", description = "Get all players in the database")
     @ApiResponse(responseCode = "200", description = "OK")
-    @GetMapping
+    @GetMapping("getAllPlayers")
     public Flux<Player> getAllPlayers() {
         return playerService.getAllPlayers();
     }
 
     @PostMapping
-    @Operation(summary = "Create player")
+    @Operation(summary = "Create player", description = "add a new player to the database")
+    @ApiResponse(responseCode = "201", description = "CREATED")
+    @ApiResponse(responseCode = "400", description = "BAD REQUEST")
+    //@ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Mono<Player>> createPlayer(@RequestBody CreatePlayerRequestDTO request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(playerService.create(request.getUserName()));
     }
 
-    @GetMapping("/getAll")
-    @Operation(summary = "Recover all players")
-    public ResponseEntity<Flux<Player>> getAll() {
-        return ResponseEntity.ok(playerService.getAllPlayers());
-    }
-
     @GetMapping("/{id}")
-    @Operation(summary = "Recover a player by ID")
+    @Operation(summary = "Recover a player by ID", description = "Get a particular player by including their ID in the body")
     public Mono<Player> getPlayerById(@PathVariable int id) {
         return playerService.getPlayerById(id);
     }
 
     @PutMapping("/{id}")
-    @Operation(summary = "Update a player's data by including their ID in the body")
-    public ResponseEntity<Mono<Player>> updatePlayer(@RequestBody Player player, @PathVariable long id) {
+    @Operation(summary = "Update a player's ", description = "Update a player data by including their ID in the body")
+    public ResponseEntity<Mono<Player>> updatePlayer(
+            @RequestBody Player player, @PathVariable long id) {
         return ResponseEntity.ok(playerService.updatePlayer(id, player.getUserName()));
     }
 
     @DeleteMapping("/delete/{id}")
-    @Operation(summary = "Delete a player by ID")
+    @Operation(summary = "Delete player", description = "Delete a player by ID")
     public Mono<Void> deletePlayer(@PathVariable int id) {
         return playerService.deletePlayer(id);
     }

@@ -93,7 +93,7 @@ public class GameService {
     }
 
     public Flux<Object> getGamesByPlayerId(Long id) {
-        return gameRepo.findByPlayerId(id)
+        return gameRepo.findById(id)
                 .switchIfEmpty(Mono.error(new GameNotFoundException("No games found for player with ID " + id)));
     }
 
@@ -104,5 +104,6 @@ public class GameService {
                         .map(count -> RankingResponseDTO.builder().userId(groupedFlux.key()).wins(count).build()))
                 .sort((a, b) -> Long.compare(b.getWins(), a.getWins()));
     }
+
 }
 
