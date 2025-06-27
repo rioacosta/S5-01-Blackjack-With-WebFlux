@@ -32,9 +32,8 @@ public class GameController {
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Get details of an already played Blackjack game")
+    @Operation(summary = "Get details of an already played Blackjack game", description = "ID required")
     public ResponseEntity<Mono<Game>> getGame(@PathVariable String id) {
-
         return ResponseEntity.ok(gameService.getGame(id));
     }
 
@@ -45,13 +44,13 @@ public class GameController {
     }
 
     @GetMapping()
-    @Operation(summary = "Get all Blackjack games played")
+    @Operation(summary = "Get all Blackjack games played", description = "Get all games played in this session")
     public Flux<Game> getAllGames() {
         return gameService.getAllGames();
     }
 
     @DeleteMapping("/{id}")
-    @Operation(summary = "Delete game")
+    @Operation(summary = "Delete game", description = "delete a game whit game ID")
     public ResponseEntity<Mono<Void>> delete(@PathVariable String id) {
         gameService.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
