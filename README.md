@@ -27,17 +27,9 @@ Bienvenido a **Blackjack API**, una aplicación web reactiva construida con **Sp
 
 ---
 
-## 📦 Cómo ejecutar el proyecto
+## 📦 Cómo ejecutar el proyecto con Docker
 
 Asegúrate de tener Docker instalado y funcionando correctamente.
-
-### Opción 1: DockerHub 
-
-Desde la raiz del proyecto ejecuta:
-```bash
-docker run -p 8080:8080 rioacosta/s5-01-blackjack-with-webflux-blackjack-api:1.0
-```
-### Opción 2: Docker Compose (Recomendado)
 
 Desde la raiz del proyecto ejecuta:
 ```bash
