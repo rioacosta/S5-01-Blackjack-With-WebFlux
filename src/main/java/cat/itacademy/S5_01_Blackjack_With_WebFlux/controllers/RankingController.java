@@ -19,7 +19,7 @@ public class RankingController {
     private final GameService gameService;
     private final PlayerService playerService;
 
-    @GetMapping("/ranking")
+    @GetMapping
     @Operation(summary = "Get players ranking")
     public Flux<RankingResponseDTO> ranking() {
         return gameService.getPlayersIDsOrderedByWins()
