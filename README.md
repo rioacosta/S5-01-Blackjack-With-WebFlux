@@ -12,7 +12,7 @@ Bienvenido a **Blackjack API**, una aplicación web reactiva construida con **Sp
 - 🐳 Docker & Docker Compose
 - 🍃 MongoDB (base de datos NoSQL)
 - 📄 Swagger/OpenAPI para documentación interactiva
--
+- 📄 Postman para pruebas
 
 ---
 
@@ -29,7 +29,7 @@ Bienvenido a **Blackjack API**, una aplicación web reactiva construida con **Sp
 
 ## 📦 Cómo ejecutar el proyecto
 
-### Opción 1: Docker (recomendado)
+## Opción 1: Docker (recomendado)
 
 ```bash
 docker run -p 8080:8080 rioacosta/s5-01-blackjack-with-webflux-blackjack-api:1.0
