@@ -27,7 +27,12 @@ Bienvenido a **Blackjack API**, una aplicación web reactiva construida con **Sp
 
 ---
 
-## 📦 Cómo ejecutar el proyecto con Docker
+## 📦 Cómo ejecutar el proyecto con Git y Docker
+
+Clona el proyecto con git y abrelo en tu IDE:
+```bash
+git clone https://github.com/rioacosta/S5-01-Blackjack-With-WebFlux.git
+```
 
 Asegúrate de tener Docker instalado y funcionando correctamente.
 
