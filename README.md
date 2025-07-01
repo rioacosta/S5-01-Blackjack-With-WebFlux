@@ -99,8 +99,11 @@ Health Check	http://localhost:8080/actuator/health
 
 
 ### 🧪 Ejemplo de flujo de juego
+Crear jugador:
+POST /players
+
 Crear partida:
-POST /games
+POST /games/new
 
 Pedir carta:
 PUT /games/{id}?askForCard=true
