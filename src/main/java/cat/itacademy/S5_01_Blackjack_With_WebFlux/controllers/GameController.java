@@ -26,21 +26,22 @@ public class GameController {
 
     @PostMapping("/new")
     @Operation(summary = "Create a new Blackjack game")
-    public ResponseEntity<Mono<Game>> createGame(@RequestBody CreateGameRequestDTO request) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(playerService.getPlayerByPlayerName(request.getPlayerName())
-                .flatMap(player -> gameService.createGame(player)));
+    public Mono<Game> createGame(@RequestBody CreateGameRequestDTO request) {
+        return playerService.getPlayerByPlayerName(request.getPlayerName())
+                .flatMap(player -> gameService.createGame(player));
+        // Status 201 CREATED puede manejarse con un filtro global o personalizado si lo deseas.
     }
 
     @GetMapping("/{id}")
     @Operation(summary = "Get details of an already played Blackjack game", description = "ID required")
-    public ResponseEntity<Mono<Game>> getGame(@PathVariable String id) {
-        return ResponseEntity.ok(gameService.getGame(id));
+    public Mono<Game> getGame(@PathVariable String id) {
+        return gameService.getGame(id);
     }
 
     @PostMapping("/{gameId}/play")
     @Operation(summary = "Play the created Blackjack game")
-    public ResponseEntity<Mono<Game>> play(@PathVariable String gameId, @RequestBody PlayRequestDTO request) {
-        return ResponseEntity.ok(gameService.play(gameId, request.isAskForCard()));
+    public Mono<Game> play(@PathVariable String gameId, @RequestBody PlayRequestDTO request) {
+        return gameService.play(gameId, request.isAskForCard());
     }
 
     @GetMapping()
@@ -50,10 +51,9 @@ public class GameController {
     }
 
     @DeleteMapping("/{id}")
-    @Operation(summary = "Delete game", description = "delete a game whit game ID")
-    public ResponseEntity<Mono<Void>> delete(@PathVariable String id) {
-        gameService.delete(id);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    @Operation(summary = "Delete a game by ID")
+    public Mono<Void> delete(@PathVariable String id) {
+        return gameService.delete(id);
+        // HTTP 204 NO CONTENT se devuelve automáticamente cuando el Mono<Void> termina sin errores.
     }
-
 }

@@ -10,11 +10,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
+import reactor.test.StepVerifier;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -27,23 +25,21 @@ class GameControllerTest {
     private GameController gameController;
 
     @Test
-
     void createGame() {
         String playerName = "Juan";
         CreateGameRequestDTO request = new CreateGameRequestDTO();
         request.setPlayerName(playerName);
 
-        // Se crea un objeto Player con el nombre del jugador
         Player player = new Player(playerName);
         Game game = new Game();
 
         when(playerService.getPlayerByPlayerName(playerName)).thenReturn(Mono.just(player));
         when(gameService.createGame(player)).thenReturn(Mono.just(game));
 
-        ResponseEntity<Mono<Game>> response = gameController.createGame(request);
+        Mono<Game> responseMono = gameController.createGame(request);
 
-        assertEquals(201, response.getStatusCodeValue());
-        assertNotNull(response.getBody());
-        response.getBody().subscribe(actualGame -> assertEquals(game, actualGame));
+        StepVerifier.create(responseMono)
+                .expectNext(game)
+                .verifyComplete();
     }
 }

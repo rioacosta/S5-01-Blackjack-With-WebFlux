@@ -3,51 +3,40 @@ package cat.itacademy.S5_01_Blackjack_With_WebFlux.model;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Data
 @Document("games")
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 public class Game {
     @Id
     private String id;
     private Long playerId;
-    private List<Card> playerCards;
-    private List<Card> croupierCards;
+    private List<Cards> playerCards = new ArrayList<>();
+    private List<Cards> croupierCards = new ArrayList<>();
+    private List<Cards> allCards = new ArrayList<>(); // Rastrea todas las cartas
     private String winner;
     private boolean finished;
 
     public Game(Long playerId) {
         this.playerId = playerId;
-        this.playerCards = new ArrayList<>();
-        this.croupierCards = new ArrayList<>();
-        // When the game starts, the player receives two cards and croupier receives one card
-        playerCards.add(Card.generateCard(playerCards));
-        playerCards.add(Card.generateCard(playerCards));
-        croupierCards.add(Card.generateCard(playerCards));
         this.finished = false;
+
+        // Repartir cartas iniciales
+        playerCards.add(drawCard());
+        playerCards.add(drawCard());
+        croupierCards.add(drawCard()); // Carta visible
+        croupierCards.add(drawCard()); // Carta oculta
     }
 
-    public void addPlayerCards(Card card) {
-        if (playerCards == null) {
-            playerCards = new ArrayList<>();
-        }
-        playerCards.add(card);
-    }
-
-    public void addCroupierCards(Card card) {
-        if (croupierCards == null) {
-            croupierCards = new ArrayList<>();
-        }
-        croupierCards.add(card);
+    public Cards drawCard() {
+        Cards newCard = Cards.generateCard(allCards);
+        allCards.add(newCard);
+        return newCard;
     }
 
     public int getPlayerScore() {
-        if (playerCards == null || playerCards.isEmpty()) {
-            return 0; // Si no hay cartas, el puntaje es 0
-        }
         return calculateScore(playerCards);
     }
 
@@ -55,30 +44,45 @@ public class Game {
         return calculateScore(croupierCards);
     }
 
-    private int calculateScore(List<Card> cards) {
-        int total = 0;
+    private int calculateScore(List<Cards> cards) {
+        int score = 0;
+        int aceCount = 0;
 
-        for (Card card : cards) {
-            switch (card.getValue()) {
-                case "1"://A
-                    if (total + 11 > 21) {
-                        total += 1; // Si sumar 11 excede 21, cuenta como 1
-                    } else {
-                        total += 11; // Asume que el As vale 11 inicialmente
-                    }
-                    break;
-                case "11"://J
-                case "12"://Q
-                case "13"://K
-                    total += 10; // Reyes, Reinas y Jotas valen 10
-                    break;
-                default:
-                    total += Integer.parseInt(card.getValue());
+        for (Cards card : cards) {
+            if (card.getValue() == CardValueEnum.ACE) {
+                score += 11;
+                aceCount++;
+            } else {
+                score += card.getValue().getNumericValue();
             }
         }
 
-        return total;
+        // Ajustar Ases de 11 a 1 si el total supera 21
+        while (score > 21 && aceCount > 0) {
+            score -= 10;
+            aceCount--;
+        }
+
+        return score;
     }
 
-}
 
+    public boolean isNaturalBlackjack(List<Cards> hand) {
+        if (hand.size() != 2) return false;
+        boolean hasAce = hand.stream().anyMatch(c -> c.getValue() == CardValueEnum.ACE);
+        boolean hasTen = hand.stream().anyMatch(c ->
+                c.getValue().getNumericValue() == 10 ||
+                        c.getValue() == CardValueEnum.JACK ||
+                        c.getValue() == CardValueEnum.QUEEN ||
+                        c.getValue() == CardValueEnum.KING);
+        return hasAce && hasTen;
+    }
+
+    public void addPlayerCards(Cards card) {
+        playerCards.add(card);
+    }
+
+    public void addCroupierCards(Cards card) {
+        croupierCards.add(card);
+    }
+}

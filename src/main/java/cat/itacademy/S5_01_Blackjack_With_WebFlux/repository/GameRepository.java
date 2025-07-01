@@ -6,6 +6,5 @@ import reactor.core.publisher.Flux;
 
 public interface GameRepository extends ReactiveMongoRepository<Game, String> {
     Flux<Game> findByWinner(String winner);
-
     Flux<Object> findById(Long id);
 }
