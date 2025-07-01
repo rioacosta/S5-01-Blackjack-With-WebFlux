@@ -51,9 +51,12 @@ MongoDB (en el puerto 27017)
 
 Blackjack API (en el puerto 8080)
 
+---
+
+###📚Endpoints:
 
 <details>
-  <summary>### 🌐 Endpoints útiles (click para expandir)</summary>
+  <summary>Endpoints útiles (click para expandir)</summary>
 
 Swagger UI	http://localhost:8080/webjars/swagger-ui/index.html
 
@@ -63,7 +66,7 @@ Health Check	http://localhost:8080/actuator/health
 </details>
 
 <details>
-  <summary>📚Todos los Endpoints para Blackjack API  (Click para expandir)</summary>
+  <summary>Todos los Endpoints para la API (Click para expandir)</summary>
 
 <br>
 
@@ -99,6 +102,7 @@ Health Check	http://localhost:8080/actuator/health
 
 </details>
 
+---
 
 
 ### 🧪 Ejemplo de flujo de juego
@@ -117,6 +121,7 @@ GET /games/{id}
 Ver ranking:
 GET /games/ranking
 
+---
 
 ### 🤝 Contribuciones
 ¡Las contribuciones son bienvenidas!
