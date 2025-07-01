@@ -53,7 +53,7 @@ Blackjack API (en el puerto 8080)
 
 
 <details>
-  <summary>### 🌐 Endpoints útiles (expandir)</summary>
+  <summary>### 🌐 Endpoints útiles (click para expandir)</summary>
 
 Swagger UI	http://localhost:8080/webjars/swagger-ui/index.html
 
@@ -61,6 +61,45 @@ API Docs	http://localhost:8080/v3/api-docs
 
 Health Check	http://localhost:8080/actuator/health
 </details>
+
+<details>
+  <summary>📚Todos los Endpoints para Blackjack API  (Click para expandir)</summary>
+
+<br>
+
+### 🃏 **BlackjackController**
+
+| Method | Endpoint                       | Descripción                                      |
+|--------|--------------------------------|--------------------------------------------------|
+| POST   | `/game/{gameId}/play`          | Jugar una partida ya creada                     |
+| POST   | `/game/new`                    | Crear una nueva partida de Blackjack            |
+| GET    | `/game`                        | Obtener todas las partidas jugadas              |
+| GET    | `/game/{id}`                   | Ver detalles de una partida específica           |
+| DELETE | `/game/{id}/delete`            | Eliminar una partida por ID                     |
+
+---
+
+### 👤 **PlayerController**
+
+| Method | Endpoint                          | Descripción                          |
+|--------|-----------------------------------|--------------------------------------|
+| PUT    | `/players/{playerId}`             | Actualizar un jugador                |
+| POST   | `/players`                        | Crear un nuevo jugador               |
+| GET    | `/players/{id}`                   | Obtener un jugador por ID            |
+| GET    | `/players/getAllPlayers`          | Listar todos los jugadores           |
+| DELETE | `/players/{id}/delete`            | Eliminar un jugador                  |
+
+---
+
+### 🏆 **RankingController**
+
+| Method | Endpoint               | Descripción                   |
+|--------|------------------------|-------------------------------|
+| GET    | `/ranking`     | Obtener el ranking de jugadores |
+
+</details>
+
+
 
 ### 🧪 Ejemplo de flujo de juego
 Crear partida:
