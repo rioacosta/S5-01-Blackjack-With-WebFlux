@@ -6,12 +6,13 @@ Bienvenido a **Blackjack API**, una aplicación web reactiva construida con **Sp
 
 ## 🚀 Tecnologías utilizadas
 
-- ⚙️ Java 17
-- 🌐 Spring Boot 3
+- ⚙️ Java 21
+- 🌐 Spring Boot 
 - 🔁 Spring WebFlux (programación reactiva)
 - 🐳 Docker & Docker Compose
 - 🍃 MongoDB (base de datos NoSQL)
 - 📄 Swagger/OpenAPI para documentación interactiva
+-
 
 ---
 
@@ -38,13 +39,15 @@ docker run -p 8080:8080 rioacosta/s5-01-blackjack-with-webflux-blackjack-api:1.0
 docker-compose up --build
 Asegúrate de tener Docker instalado y andando.
 
+---
+
 ## 🌐 Endpoints útiles
 Recurso	URL
 Swagger UI	http://localhost:8080/webjars/swagger-ui/index.html
 API Docs	http://localhost:8080/v3/api-docs
 Health Check	http://localhost:8080/actuator/health
 
-
+---
 ## 🧪 Ejemplo de flujo de juego
 Crear partida: POST /games
 
@@ -56,6 +59,6 @@ Ver estado: GET /games/{id}
 
 Ver ranking: GET /games/ranking
 
-
+---
 ## 🤝 Contribuciones
 ¡Las contribuciones son bienvenidas! Puedes abrir issues, enviar pull requests o sugerencias.
