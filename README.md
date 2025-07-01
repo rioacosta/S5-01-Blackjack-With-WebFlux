@@ -29,22 +29,37 @@ Bienvenido a **Blackjack API**, una aplicación web reactiva construida con **Sp
 
 ## 📦 Cómo ejecutar el proyecto
 
-### Opción 1: Docker (recomendado)
+Asegúrate de tener Docker instalado y funcionando correctamente.
 
+### Opción 1: DockerHub 
+
+Desde la raiz del proyecto ejecuta:
 ```bash
 docker run -p 8080:8080 rioacosta/s5-01-blackjack-with-webflux-blackjack-api:1.0
 ```
-### Opción 2: Docker Compose (con MongoDB)
+### Opción 2: Docker Compose (Recomendado)
+
+Desde la raiz del proyecto ejecuta:
 ```bash
 docker-compose up --build
 ```
-Asegúrate de tener Docker instalado y funcionando correctamente.
+Esto iniciará:
+
+MySQL (en el puerto 3307)
+
+MongoDB (en el puerto 27017)
+
+Blackjack API (en el puerto 8080)
+
 
 ### 🌐 Endpoints útiles
-Recurso	URL
+
 Swagger UI	http://localhost:8080/webjars/swagger-ui/index.html
+
 API Docs	http://localhost:8080/v3/api-docs
+
 Health Check	http://localhost:8080/actuator/health
+
 
 ### 🧪 Ejemplo de flujo de juego
 Crear partida:
@@ -61,6 +76,7 @@ GET /games/{id}
 
 Ver ranking:
 GET /games/ranking
+
 
 ### 🤝 Contribuciones
 ¡Las contribuciones son bienvenidas!
