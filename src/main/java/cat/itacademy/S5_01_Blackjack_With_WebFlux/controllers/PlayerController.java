@@ -41,13 +41,13 @@ public class PlayerController {
         return playerService.getPlayerById(id);
     }
 
-    @PutMapping("/player/{playerId}")
+    @PutMapping("/{playerId}")
     @Operation(summary = "Update a player's ", description = "Update a player data by including their ID in the body")
     public Mono<Player> updatePlayer(@RequestBody Player player, @PathVariable long id) {
         return playerService.updatePlayer(id, player.getUserName());
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}/delete")
     @Operation(summary = "Delete player", description = "Delete a player by ID")
     public Mono<Void> deletePlayer(@PathVariable int id) {
         return playerService.deletePlayer(id);
