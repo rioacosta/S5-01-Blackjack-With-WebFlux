@@ -100,45 +100,33 @@ Health Check	http://localhost:8080/actuator/health
 
 ### 🧪 Ejemplo de flujo de juego
 
-Crear jugador:
-
-POST /players
+Crear jugador:   POST /players
 
 {
   "userName": "your name"
 }
 
-Crear partida:
-
-POST /games/new
+Crear partida:   POST /games/new
 
 {
   "playerName": "your name"
 }
 
-Pedir carta:
-
-PUT /games/{id}/play
+Pedir carta:   PUT /games/{id}/play
 
 {
   "askForCard": true
 }
 
-Plantarse:
-
-PUT /games/{id}/play
+Plantarse:   PUT /games/{id}/play
 
 {
   "askForCard": false
 }
 
-Ver estado:
+Ver estado:   GET /games/{id}
 
-GET /games/{id}
-
-Ver ranking:
-
-GET /ranking
+Ver ranking:   GET /ranking
 
 ---
 
