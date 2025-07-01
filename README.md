@@ -102,20 +102,36 @@ Health Check	http://localhost:8080/actuator/health
 Crear jugador:
 POST /players
 
+{
+  "userName": "your name"
+}
+
 Crear partida:
 POST /games/new
 
+{
+  "playerName": "your name"
+}
+
 Pedir carta:
-PUT /games/{id}?askForCard=true
+PUT /games/{id}/play
+
+{
+  "askForCard": true
+}
 
 Plantarse:
-PUT /games/{id}?askForCard=false
+PUT /games/{id}/play
+
+{
+  "askForCard": false
+}
 
 Ver estado:
 GET /games/{id}
 
 Ver ranking:
-GET /games/ranking
+GET /ranking
 
 ---
 
