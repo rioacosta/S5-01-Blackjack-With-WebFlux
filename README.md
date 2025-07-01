@@ -47,6 +47,7 @@ Blackjack API (en el puerto 8080)
 
 ##📚Endpoints:
 
+
 <details>
   <summary>Endpoints útiles (click para expandir)</summary>
 
