@@ -33,7 +33,6 @@ public class GlobalExceptionHandler {
         return Mono.just(new ErrorResponse("INTERNAL_SERVER_ERROR", "Unexpected error occurred"));
     }
 
-    // Clase interna para respuesta de error
     public static class ErrorResponse {
         private String error;
         private String message;

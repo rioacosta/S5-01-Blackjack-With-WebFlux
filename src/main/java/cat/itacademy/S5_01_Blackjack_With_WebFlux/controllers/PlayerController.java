@@ -29,12 +29,10 @@ public class PlayerController {
     }
 
     @PostMapping
-    @Operation(summary = "Create player", description = "add a new player to the database")
-    @ApiResponse(responseCode = "201", description = "CREATED")
-    @ApiResponse(responseCode = "400", description = "BAD REQUEST")
-    //@ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Mono<Player>> createPlayer(@RequestBody CreatePlayerRequestDTO request) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(playerService.create(request.getUserName()));
+    @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "Create player", description = "Add a new player to the database")
+    public Mono<Player> createPlayer(@RequestBody CreatePlayerRequestDTO request) {
+        return playerService.create(request.getUserName());
     }
 
     @GetMapping("/{id}")
@@ -43,11 +41,10 @@ public class PlayerController {
         return playerService.getPlayerById(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/player/{playerId}")
     @Operation(summary = "Update a player's ", description = "Update a player data by including their ID in the body")
-    public ResponseEntity<Mono<Player>> updatePlayer(
-            @RequestBody Player player, @PathVariable long id) {
-        return ResponseEntity.ok(playerService.updatePlayer(id, player.getUserName()));
+    public Mono<Player> updatePlayer(@RequestBody Player player, @PathVariable long id) {
+        return playerService.updatePlayer(id, player.getUserName());
     }
 
     @DeleteMapping("/delete/{id}")

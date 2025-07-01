@@ -9,7 +9,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -26,10 +25,10 @@ public class GameController {
 
     @PostMapping("/new")
     @Operation(summary = "Create a new Blackjack game")
+    @ResponseStatus(HttpStatus.CREATED)
     public Mono<Game> createGame(@RequestBody CreateGameRequestDTO request) {
         return playerService.getPlayerByPlayerName(request.getPlayerName())
                 .flatMap(player -> gameService.createGame(player));
-        // Status 201 CREATED puede manejarse con un filtro global o personalizado si lo deseas.
     }
 
     @GetMapping("/{id}")
@@ -50,10 +49,10 @@ public class GameController {
         return gameService.getAllGames();
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}/delete")
     @Operation(summary = "Delete a game by ID")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public Mono<Void> delete(@PathVariable String id) {
         return gameService.delete(id);
-        // HTTP 204 NO CONTENT se devuelve automáticamente cuando el Mono<Void> termina sin errores.
     }
 }

@@ -26,15 +26,6 @@ public class PlayerService {
                 });
     }
 
-    public Mono<Player> updateName(Long id, String newName) {
-        return playerRepo.findById(id)
-                .switchIfEmpty(Mono.error(new PlayerNotFoundException("Player with ID " + id + " not found")))
-                .flatMap(player -> {
-                    player.setUserName(newName);
-                    return playerRepo.save(player);
-                });
-    }
-
     public Mono<Player> getPlayerByPlayerName(String playerName) {
         return playerRepo.findByUserName(playerName)
                 .switchIfEmpty(Mono.error(new PlayerNotFoundException("Player with username '" + playerName + "' not found")));

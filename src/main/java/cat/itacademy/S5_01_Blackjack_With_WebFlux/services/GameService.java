@@ -112,7 +112,7 @@ public class GameService {
         return gameRepo.findAll();
     }
 
-    public Flux<Object> getGamesById(Long id) {
+    public Mono<Game> getGamesById(String id) {
         return gameRepo.findById(id)
                 .switchIfEmpty(Mono.error(new GameNotFoundException("No games found with ID " + id)));
     }
