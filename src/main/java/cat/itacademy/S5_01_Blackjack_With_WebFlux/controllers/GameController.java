@@ -49,6 +49,7 @@ public class GameController {
         return gameService.getAllGames();
     }
 
+
     @DeleteMapping("/{id}/delete")
     @Operation(summary = "Delete a game by ID")
     @ResponseStatus(HttpStatus.NO_CONTENT)

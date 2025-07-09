@@ -1,6 +1,5 @@
 package cat.itacademy.S5_01_Blackjack_With_WebFlux.controllers;
 
-
 import cat.itacademy.S5_01_Blackjack_With_WebFlux.dto.CreatePlayerRequestDTO;
 import cat.itacademy.S5_01_Blackjack_With_WebFlux.model.Player;
 import cat.itacademy.S5_01_Blackjack_With_WebFlux.services.PlayerService;
@@ -8,7 +7,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
